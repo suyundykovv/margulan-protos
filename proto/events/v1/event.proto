@@ -36,25 +36,25 @@ service EventService {
   rpc ListLessons(LessonFilter) returns (stream Lesson);
   rpc UpdateLesson(UpdateLessonRequest) returns (Lesson);
   rpc DeleteLesson(DeleteLessonRequest) returns (google.protobuf.Empty);
-  
+
   rpc CreateTask(CreateTaskRequest) returns (Task);
   rpc GetTask(GetTaskRequest) returns (Task);
   rpc ListTasks(TaskFilter) returns (stream Task);
   rpc UpdateTask(UpdateTaskRequest) returns (Task);
   rpc DeleteTask(DeleteTaskRequest) returns (google.protobuf.Empty);
-  
+
   rpc CreateLessonSchedule(CreateLessonScheduleRequest) returns (LessonSchedule);
   rpc GetLessonSchedule(GetLessonScheduleRequest) returns (LessonSchedule);
   rpc ListLessonSchedules(LessonScheduleFilter) returns (stream LessonSchedule);
   rpc UpdateLessonSchedule(UpdateLessonScheduleRequest) returns (LessonSchedule);
   rpc DeleteLessonSchedule(DeleteScheduleRequest) returns (google.protobuf.Empty);
-  
+
   rpc CreateTaskSchedule(CreateTaskScheduleRequest) returns (TaskSchedule);
   rpc GetTaskSchedule(GetTaskScheduleRequest) returns (TaskSchedule);
   rpc ListTaskSchedules(TaskScheduleFilter) returns (stream TaskSchedule);
   rpc UpdateTaskSchedule(UpdateTaskScheduleRequest) returns (TaskSchedule);
-  rpc DeleteTaskSchedule(DeleteScheduleRequest) returns (google.protobuf.Empty);
-  
+  rpc DeleteTaskSchedule(DeleteTaskRequest) returns (google.protobuf.Empty);
+
   rpc BatchCreateLessons(BatchCreateLessonsRequest) returns (BatchLessonsResponse);
   rpc BatchCreateTasks(BatchCreateTasksRequest) returns (BatchTasksResponse);
   rpc BatchUpdateLessons(BatchUpdateLessonsRequest) returns (BatchLessonsResponse);
@@ -121,15 +121,15 @@ message TaskSchedule {
 }
 
 message CreateLessonRequest {
-  string title = 1;
+  optional string title = 1;
   google.protobuf.Timestamp start_time = 2;
   google.protobuf.Timestamp end_time = 3;
-  string group_id = 4;
-  string course_id = 5;
-  LessonStatus status = 6;
+  optional string group_id = 4;
+  optional string course_id = 5;
+  optional LessonStatus status = 6;
   google.protobuf.StringValue meeting_url = 7;
-  string classroom = 8;
-  bool is_online = 9;
+  optional string classroom = 8;
+  optional bool is_online = 9;
 }
 
 message UpdateLessonRequest {
@@ -152,12 +152,12 @@ message BatchUpdateLessonsRequest {
 }
 
 message CreateTaskRequest {
-  string title = 1;
-  string description = 2;
+  optional string title = 1;
+  optional string description = 2;
   google.protobuf.Timestamp due_date = 3;
-  string group_id = 4;
-  string course_id = 5;
-  TaskType type = 6;
+  optional string group_id = 4;
+  optional string course_id = 5;
+  optional TaskType type = 6;
   google.protobuf.StringValue external_resource_id = 7;
   repeated string attachments = 8;
   google.protobuf.Int32Value max_score = 9;
@@ -184,12 +184,12 @@ message BatchUpdateTasksRequest {
 }
 
 message CreateLessonScheduleRequest {
-  string group_id = 1;
-  string title = 2;
- r valid_from = 3;
+  optional string group_id = 1;
+  optional string title = 2;
+  google.protobuf.Timestamp valid_from = 3;
   google.protobuf.Timestamp valid_to = 4;
-  string course_id = 5;
-  bool is_active = 6;
+  optional string course_id = 5;
+  optional bool is_active = 6;
   repeated string lesson_ids = 7;
 }
 
@@ -203,12 +203,12 @@ message UpdateLessonScheduleRequest {
 }
 
 message CreateTaskScheduleRequest {
-  string group_id = 1;
-  string title = 2;
+  optional string group_id = 1;
+  optional string title = 2;
   google.protobuf.Timestamp valid_from = 3;
   google.protobuf.Timestamp valid_to = 4;
-  string course_id = 5;
-  bool is_active = 6;
+  optional string course_id = 5;
+  optional bool is_active = 6;
   repeated string task_ids = 7;
 }
 

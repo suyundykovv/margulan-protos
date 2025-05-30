@@ -69,8 +69,7 @@ type EventServiceClient interface {
 	GetTaskSchedule(ctx context.Context, in *GetTaskScheduleRequest, opts ...grpc.CallOption) (*TaskSchedule, error)
 	ListTaskSchedules(ctx context.Context, in *TaskScheduleFilter, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TaskSchedule], error)
 	UpdateTaskSchedule(ctx context.Context, in *UpdateTaskScheduleRequest, opts ...grpc.CallOption) (*TaskSchedule, error)
-	DeleteTaskSchedule(ctx context.Context, in *DeleteScheduleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Батч-операции
+	DeleteTaskSchedule(ctx context.Context, in *DeleteTaskRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	BatchCreateLessons(ctx context.Context, in *BatchCreateLessonsRequest, opts ...grpc.CallOption) (*BatchLessonsResponse, error)
 	BatchCreateTasks(ctx context.Context, in *BatchCreateTasksRequest, opts ...grpc.CallOption) (*BatchTasksResponse, error)
 	BatchUpdateLessons(ctx context.Context, in *BatchUpdateLessonsRequest, opts ...grpc.CallOption) (*BatchLessonsResponse, error)
@@ -311,7 +310,7 @@ func (c *eventServiceClient) UpdateTaskSchedule(ctx context.Context, in *UpdateT
 	return out, nil
 }
 
-func (c *eventServiceClient) DeleteTaskSchedule(ctx context.Context, in *DeleteScheduleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *eventServiceClient) DeleteTaskSchedule(ctx context.Context, in *DeleteTaskRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, EventService_DeleteTaskSchedule_FullMethodName, in, out, cOpts...)
@@ -384,8 +383,7 @@ type EventServiceServer interface {
 	GetTaskSchedule(context.Context, *GetTaskScheduleRequest) (*TaskSchedule, error)
 	ListTaskSchedules(*TaskScheduleFilter, grpc.ServerStreamingServer[TaskSchedule]) error
 	UpdateTaskSchedule(context.Context, *UpdateTaskScheduleRequest) (*TaskSchedule, error)
-	DeleteTaskSchedule(context.Context, *DeleteScheduleRequest) (*emptypb.Empty, error)
-	// Батч-операции
+	DeleteTaskSchedule(context.Context, *DeleteTaskRequest) (*emptypb.Empty, error)
 	BatchCreateLessons(context.Context, *BatchCreateLessonsRequest) (*BatchLessonsResponse, error)
 	BatchCreateTasks(context.Context, *BatchCreateTasksRequest) (*BatchTasksResponse, error)
 	BatchUpdateLessons(context.Context, *BatchUpdateLessonsRequest) (*BatchLessonsResponse, error)
@@ -457,7 +455,7 @@ func (UnimplementedEventServiceServer) ListTaskSchedules(*TaskScheduleFilter, gr
 func (UnimplementedEventServiceServer) UpdateTaskSchedule(context.Context, *UpdateTaskScheduleRequest) (*TaskSchedule, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaskSchedule not implemented")
 }
-func (UnimplementedEventServiceServer) DeleteTaskSchedule(context.Context, *DeleteScheduleRequest) (*emptypb.Empty, error) {
+func (UnimplementedEventServiceServer) DeleteTaskSchedule(context.Context, *DeleteTaskRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTaskSchedule not implemented")
 }
 func (UnimplementedEventServiceServer) BatchCreateLessons(context.Context, *BatchCreateLessonsRequest) (*BatchLessonsResponse, error) {
@@ -808,7 +806,7 @@ func _EventService_UpdateTaskSchedule_Handler(srv interface{}, ctx context.Conte
 }
 
 func _EventService_DeleteTaskSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteScheduleRequest)
+	in := new(DeleteTaskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -820,7 +818,7 @@ func _EventService_DeleteTaskSchedule_Handler(srv interface{}, ctx context.Conte
 		FullMethod: EventService_DeleteTaskSchedule_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EventServiceServer).DeleteTaskSchedule(ctx, req.(*DeleteScheduleRequest))
+		return srv.(EventServiceServer).DeleteTaskSchedule(ctx, req.(*DeleteTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

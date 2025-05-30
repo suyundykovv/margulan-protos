@@ -705,15 +705,15 @@ func (x *TaskSchedule) GetUpdatedAt() *timestamppb.Timestamp {
 
 type CreateLessonRequest struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Title         string                  `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	Title         *string                 `protobuf:"bytes,1,opt,name=title,proto3,oneof" json:"title,omitempty"`
 	StartTime     *timestamppb.Timestamp  `protobuf:"bytes,2,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime       *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	GroupId       string                  `protobuf:"bytes,4,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	CourseId      string                  `protobuf:"bytes,5,opt,name=course_id,json=courseId,proto3" json:"course_id,omitempty"`
-	Status        LessonStatus            `protobuf:"varint,6,opt,name=status,proto3,enum=events.v1.LessonStatus" json:"status,omitempty"`
+	GroupId       *string                 `protobuf:"bytes,4,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"`
+	CourseId      *string                 `protobuf:"bytes,5,opt,name=course_id,json=courseId,proto3,oneof" json:"course_id,omitempty"`
+	Status        *LessonStatus           `protobuf:"varint,6,opt,name=status,proto3,enum=events.v1.LessonStatus,oneof" json:"status,omitempty"`
 	MeetingUrl    *wrapperspb.StringValue `protobuf:"bytes,7,opt,name=meeting_url,json=meetingUrl,proto3" json:"meeting_url,omitempty"`
-	Classroom     string                  `protobuf:"bytes,8,opt,name=classroom,proto3" json:"classroom,omitempty"`
-	IsOnline      bool                    `protobuf:"varint,9,opt,name=is_online,json=isOnline,proto3" json:"is_online,omitempty"`
+	Classroom     *string                 `protobuf:"bytes,8,opt,name=classroom,proto3,oneof" json:"classroom,omitempty"`
+	IsOnline      *bool                   `protobuf:"varint,9,opt,name=is_online,json=isOnline,proto3,oneof" json:"is_online,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -749,8 +749,8 @@ func (*CreateLessonRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *CreateLessonRequest) GetTitle() string {
-	if x != nil {
-		return x.Title
+	if x != nil && x.Title != nil {
+		return *x.Title
 	}
 	return ""
 }
@@ -770,22 +770,22 @@ func (x *CreateLessonRequest) GetEndTime() *timestamppb.Timestamp {
 }
 
 func (x *CreateLessonRequest) GetGroupId() string {
-	if x != nil {
-		return x.GroupId
+	if x != nil && x.GroupId != nil {
+		return *x.GroupId
 	}
 	return ""
 }
 
 func (x *CreateLessonRequest) GetCourseId() string {
-	if x != nil {
-		return x.CourseId
+	if x != nil && x.CourseId != nil {
+		return *x.CourseId
 	}
 	return ""
 }
 
 func (x *CreateLessonRequest) GetStatus() LessonStatus {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return LessonStatus_LESSON_PLANNED
 }
@@ -798,15 +798,15 @@ func (x *CreateLessonRequest) GetMeetingUrl() *wrapperspb.StringValue {
 }
 
 func (x *CreateLessonRequest) GetClassroom() string {
-	if x != nil {
-		return x.Classroom
+	if x != nil && x.Classroom != nil {
+		return *x.Classroom
 	}
 	return ""
 }
 
 func (x *CreateLessonRequest) GetIsOnline() bool {
-	if x != nil {
-		return x.IsOnline
+	if x != nil && x.IsOnline != nil {
+		return *x.IsOnline
 	}
 	return false
 }
@@ -1001,12 +1001,12 @@ func (x *BatchUpdateLessonsRequest) GetLessons() []*UpdateLessonRequest {
 
 type CreateTaskRequest struct {
 	state              protoimpl.MessageState  `protogen:"open.v1"`
-	Title              string                  `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
-	Description        string                  `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	Title              *string                 `protobuf:"bytes,1,opt,name=title,proto3,oneof" json:"title,omitempty"`
+	Description        *string                 `protobuf:"bytes,2,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	DueDate            *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=due_date,json=dueDate,proto3" json:"due_date,omitempty"`
-	GroupId            string                  `protobuf:"bytes,4,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	CourseId           string                  `protobuf:"bytes,5,opt,name=course_id,json=courseId,proto3" json:"course_id,omitempty"`
-	Type               TaskType                `protobuf:"varint,6,opt,name=type,proto3,enum=events.v1.TaskType" json:"type,omitempty"`
+	GroupId            *string                 `protobuf:"bytes,4,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"`
+	CourseId           *string                 `protobuf:"bytes,5,opt,name=course_id,json=courseId,proto3,oneof" json:"course_id,omitempty"`
+	Type               *TaskType               `protobuf:"varint,6,opt,name=type,proto3,enum=events.v1.TaskType,oneof" json:"type,omitempty"`
 	ExternalResourceId *wrapperspb.StringValue `protobuf:"bytes,7,opt,name=external_resource_id,json=externalResourceId,proto3" json:"external_resource_id,omitempty"`
 	Attachments        []string                `protobuf:"bytes,8,rep,name=attachments,proto3" json:"attachments,omitempty"`
 	MaxScore           *wrapperspb.Int32Value  `protobuf:"bytes,9,opt,name=max_score,json=maxScore,proto3" json:"max_score,omitempty"`
@@ -1045,15 +1045,15 @@ func (*CreateTaskRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *CreateTaskRequest) GetTitle() string {
-	if x != nil {
-		return x.Title
+	if x != nil && x.Title != nil {
+		return *x.Title
 	}
 	return ""
 }
 
 func (x *CreateTaskRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
@@ -1066,22 +1066,22 @@ func (x *CreateTaskRequest) GetDueDate() *timestamppb.Timestamp {
 }
 
 func (x *CreateTaskRequest) GetGroupId() string {
-	if x != nil {
-		return x.GroupId
+	if x != nil && x.GroupId != nil {
+		return *x.GroupId
 	}
 	return ""
 }
 
 func (x *CreateTaskRequest) GetCourseId() string {
-	if x != nil {
-		return x.CourseId
+	if x != nil && x.CourseId != nil {
+		return *x.CourseId
 	}
 	return ""
 }
 
 func (x *CreateTaskRequest) GetType() TaskType {
-	if x != nil {
-		return x.Type
+	if x != nil && x.Type != nil {
+		return *x.Type
 	}
 	return TaskType_TASK_EXAM
 }
@@ -1305,12 +1305,12 @@ func (x *BatchUpdateTasksRequest) GetTasks() []*UpdateTaskRequest {
 
 type CreateLessonScheduleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	GroupId       string                 `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	GroupId       *string                `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"`
+	Title         *string                `protobuf:"bytes,2,opt,name=title,proto3,oneof" json:"title,omitempty"`
 	ValidFrom     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=valid_from,json=validFrom,proto3" json:"valid_from,omitempty"`
 	ValidTo       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=valid_to,json=validTo,proto3" json:"valid_to,omitempty"`
-	CourseId      string                 `protobuf:"bytes,5,opt,name=course_id,json=courseId,proto3" json:"course_id,omitempty"`
-	IsActive      bool                   `protobuf:"varint,6,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	CourseId      *string                `protobuf:"bytes,5,opt,name=course_id,json=courseId,proto3,oneof" json:"course_id,omitempty"`
+	IsActive      *bool                  `protobuf:"varint,6,opt,name=is_active,json=isActive,proto3,oneof" json:"is_active,omitempty"`
 	LessonIds     []string               `protobuf:"bytes,7,rep,name=lesson_ids,json=lessonIds,proto3" json:"lesson_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1347,15 +1347,15 @@ func (*CreateLessonScheduleRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *CreateLessonScheduleRequest) GetGroupId() string {
-	if x != nil {
-		return x.GroupId
+	if x != nil && x.GroupId != nil {
+		return *x.GroupId
 	}
 	return ""
 }
 
 func (x *CreateLessonScheduleRequest) GetTitle() string {
-	if x != nil {
-		return x.Title
+	if x != nil && x.Title != nil {
+		return *x.Title
 	}
 	return ""
 }
@@ -1375,15 +1375,15 @@ func (x *CreateLessonScheduleRequest) GetValidTo() *timestamppb.Timestamp {
 }
 
 func (x *CreateLessonScheduleRequest) GetCourseId() string {
-	if x != nil {
-		return x.CourseId
+	if x != nil && x.CourseId != nil {
+		return *x.CourseId
 	}
 	return ""
 }
 
 func (x *CreateLessonScheduleRequest) GetIsActive() bool {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return false
 }
@@ -1481,12 +1481,12 @@ func (x *UpdateLessonScheduleRequest) GetRemoveLessonIds() []string {
 
 type CreateTaskScheduleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	GroupId       string                 `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	GroupId       *string                `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"`
+	Title         *string                `protobuf:"bytes,2,opt,name=title,proto3,oneof" json:"title,omitempty"`
 	ValidFrom     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=valid_from,json=validFrom,proto3" json:"valid_from,omitempty"`
 	ValidTo       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=valid_to,json=validTo,proto3" json:"valid_to,omitempty"`
-	CourseId      string                 `protobuf:"bytes,5,opt,name=course_id,json=courseId,proto3" json:"course_id,omitempty"`
-	IsActive      bool                   `protobuf:"varint,6,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	CourseId      *string                `protobuf:"bytes,5,opt,name=course_id,json=courseId,proto3,oneof" json:"course_id,omitempty"`
+	IsActive      *bool                  `protobuf:"varint,6,opt,name=is_active,json=isActive,proto3,oneof" json:"is_active,omitempty"`
 	TaskIds       []string               `protobuf:"bytes,7,rep,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1523,15 +1523,15 @@ func (*CreateTaskScheduleRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *CreateTaskScheduleRequest) GetGroupId() string {
-	if x != nil {
-		return x.GroupId
+	if x != nil && x.GroupId != nil {
+		return *x.GroupId
 	}
 	return ""
 }
 
 func (x *CreateTaskScheduleRequest) GetTitle() string {
-	if x != nil {
-		return x.Title
+	if x != nil && x.Title != nil {
+		return *x.Title
 	}
 	return ""
 }
@@ -1551,15 +1551,15 @@ func (x *CreateTaskScheduleRequest) GetValidTo() *timestamppb.Timestamp {
 }
 
 func (x *CreateTaskScheduleRequest) GetCourseId() string {
-	if x != nil {
-		return x.CourseId
+	if x != nil && x.CourseId != nil {
+		return *x.CourseId
 	}
 	return ""
 }
 
 func (x *CreateTaskScheduleRequest) GetIsActive() bool {
-	if x != nil {
-		return x.IsActive
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
 	}
 	return false
 }
@@ -2559,19 +2559,28 @@ const file_events_v1_event_proto_rawDesc = "" +
 	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
 	"updated_at\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x80\x03\n" +
-	"\x13CreateLessonRequest\x12\x14\n" +
-	"\x05title\x18\x01 \x01(\tR\x05title\x129\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xea\x03\n" +
+	"\x13CreateLessonRequest\x12\x19\n" +
+	"\x05title\x18\x01 \x01(\tH\x00R\x05title\x88\x01\x01\x129\n" +
 	"\n" +
 	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x19\n" +
-	"\bgroup_id\x18\x04 \x01(\tR\agroupId\x12\x1b\n" +
-	"\tcourse_id\x18\x05 \x01(\tR\bcourseId\x12/\n" +
-	"\x06status\x18\x06 \x01(\x0e2\x17.events.v1.LessonStatusR\x06status\x12=\n" +
+	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x1e\n" +
+	"\bgroup_id\x18\x04 \x01(\tH\x01R\agroupId\x88\x01\x01\x12 \n" +
+	"\tcourse_id\x18\x05 \x01(\tH\x02R\bcourseId\x88\x01\x01\x124\n" +
+	"\x06status\x18\x06 \x01(\x0e2\x17.events.v1.LessonStatusH\x03R\x06status\x88\x01\x01\x12=\n" +
 	"\vmeeting_url\x18\a \x01(\v2\x1c.google.protobuf.StringValueR\n" +
-	"meetingUrl\x12\x1c\n" +
-	"\tclassroom\x18\b \x01(\tR\tclassroom\x12\x1b\n" +
-	"\tis_online\x18\t \x01(\bR\bisOnline\"\xb0\x03\n" +
+	"meetingUrl\x12!\n" +
+	"\tclassroom\x18\b \x01(\tH\x04R\tclassroom\x88\x01\x01\x12 \n" +
+	"\tis_online\x18\t \x01(\bH\x05R\bisOnline\x88\x01\x01B\b\n" +
+	"\x06_titleB\v\n" +
+	"\t_group_idB\f\n" +
+	"\n" +
+	"_course_idB\t\n" +
+	"\a_statusB\f\n" +
+	"\n" +
+	"_classroomB\f\n" +
+	"\n" +
+	"_is_online\"\xb0\x03\n" +
 	"\x13UpdateLessonRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x122\n" +
 	"\x05title\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x05title\x129\n" +
@@ -2586,17 +2595,23 @@ const file_events_v1_event_proto_rawDesc = "" +
 	"\x19BatchCreateLessonsRequest\x128\n" +
 	"\alessons\x18\x01 \x03(\v2\x1e.events.v1.CreateLessonRequestR\alessons\"U\n" +
 	"\x19BatchUpdateLessonsRequest\x128\n" +
-	"\alessons\x18\x01 \x03(\v2\x1e.events.v1.UpdateLessonRequestR\alessons\"\x8f\x03\n" +
-	"\x11CreateTaskRequest\x12\x14\n" +
-	"\x05title\x18\x01 \x01(\tR\x05title\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x125\n" +
-	"\bdue_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\adueDate\x12\x19\n" +
-	"\bgroup_id\x18\x04 \x01(\tR\agroupId\x12\x1b\n" +
-	"\tcourse_id\x18\x05 \x01(\tR\bcourseId\x12'\n" +
-	"\x04type\x18\x06 \x01(\x0e2\x13.events.v1.TaskTypeR\x04type\x12N\n" +
+	"\alessons\x18\x01 \x03(\v2\x1e.events.v1.UpdateLessonRequestR\alessons\"\xe6\x03\n" +
+	"\x11CreateTaskRequest\x12\x19\n" +
+	"\x05title\x18\x01 \x01(\tH\x00R\x05title\x88\x01\x01\x12%\n" +
+	"\vdescription\x18\x02 \x01(\tH\x01R\vdescription\x88\x01\x01\x125\n" +
+	"\bdue_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\adueDate\x12\x1e\n" +
+	"\bgroup_id\x18\x04 \x01(\tH\x02R\agroupId\x88\x01\x01\x12 \n" +
+	"\tcourse_id\x18\x05 \x01(\tH\x03R\bcourseId\x88\x01\x01\x12,\n" +
+	"\x04type\x18\x06 \x01(\x0e2\x13.events.v1.TaskTypeH\x04R\x04type\x88\x01\x01\x12N\n" +
 	"\x14external_resource_id\x18\a \x01(\v2\x1c.google.protobuf.StringValueR\x12externalResourceId\x12 \n" +
 	"\vattachments\x18\b \x03(\tR\vattachments\x128\n" +
-	"\tmax_score\x18\t \x01(\v2\x1b.google.protobuf.Int32ValueR\bmaxScore\"\xd2\x03\n" +
+	"\tmax_score\x18\t \x01(\v2\x1b.google.protobuf.Int32ValueR\bmaxScoreB\b\n" +
+	"\x06_titleB\x0e\n" +
+	"\f_descriptionB\v\n" +
+	"\t_group_idB\f\n" +
+	"\n" +
+	"_course_idB\a\n" +
+	"\x05_type\"\xd2\x03\n" +
 	"\x11UpdateTaskRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x122\n" +
 	"\x05title\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x05title\x12>\n" +
@@ -2610,33 +2625,45 @@ const file_events_v1_event_proto_rawDesc = "" +
 	"\x17BatchCreateTasksRequest\x122\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x1c.events.v1.CreateTaskRequestR\x05tasks\"M\n" +
 	"\x17BatchUpdateTasksRequest\x122\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x1c.events.v1.UpdateTaskRequestR\x05tasks\"\x99\x02\n" +
-	"\x1bCreateLessonScheduleRequest\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\tR\agroupId\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title\x129\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x1c.events.v1.UpdateTaskRequestR\x05tasks\"\xe0\x02\n" +
+	"\x1bCreateLessonScheduleRequest\x12\x1e\n" +
+	"\bgroup_id\x18\x01 \x01(\tH\x00R\agroupId\x88\x01\x01\x12\x19\n" +
+	"\x05title\x18\x02 \x01(\tH\x01R\x05title\x88\x01\x01\x129\n" +
 	"\n" +
 	"valid_from\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tvalidFrom\x125\n" +
-	"\bvalid_to\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\avalidTo\x12\x1b\n" +
-	"\tcourse_id\x18\x05 \x01(\tR\bcourseId\x12\x1b\n" +
-	"\tis_active\x18\x06 \x01(\bR\bisActive\x12\x1d\n" +
+	"\bvalid_to\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\avalidTo\x12 \n" +
+	"\tcourse_id\x18\x05 \x01(\tH\x02R\bcourseId\x88\x01\x01\x12 \n" +
+	"\tis_active\x18\x06 \x01(\bH\x03R\bisActive\x88\x01\x01\x12\x1d\n" +
 	"\n" +
-	"lesson_ids\x18\a \x03(\tR\tlessonIds\"\xa3\x02\n" +
+	"lesson_ids\x18\a \x03(\tR\tlessonIdsB\v\n" +
+	"\t_group_idB\b\n" +
+	"\x06_titleB\f\n" +
+	"\n" +
+	"_course_idB\f\n" +
+	"\n" +
+	"_is_active\"\xa3\x02\n" +
 	"\x1bUpdateLessonScheduleRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x122\n" +
 	"\x05title\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x05title\x125\n" +
 	"\bvalid_to\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\avalidTo\x127\n" +
 	"\tis_active\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\bisActive\x12$\n" +
 	"\x0eadd_lesson_ids\x18\x05 \x03(\tR\faddLessonIds\x12*\n" +
-	"\x11remove_lesson_ids\x18\x06 \x03(\tR\x0fremoveLessonIds\"\x93\x02\n" +
-	"\x19CreateTaskScheduleRequest\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\tR\agroupId\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title\x129\n" +
+	"\x11remove_lesson_ids\x18\x06 \x03(\tR\x0fremoveLessonIds\"\xda\x02\n" +
+	"\x19CreateTaskScheduleRequest\x12\x1e\n" +
+	"\bgroup_id\x18\x01 \x01(\tH\x00R\agroupId\x88\x01\x01\x12\x19\n" +
+	"\x05title\x18\x02 \x01(\tH\x01R\x05title\x88\x01\x01\x129\n" +
 	"\n" +
 	"valid_from\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tvalidFrom\x125\n" +
-	"\bvalid_to\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\avalidTo\x12\x1b\n" +
-	"\tcourse_id\x18\x05 \x01(\tR\bcourseId\x12\x1b\n" +
-	"\tis_active\x18\x06 \x01(\bR\bisActive\x12\x19\n" +
-	"\btask_ids\x18\a \x03(\tR\ataskIds\"\x99\x02\n" +
+	"\bvalid_to\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\avalidTo\x12 \n" +
+	"\tcourse_id\x18\x05 \x01(\tH\x02R\bcourseId\x88\x01\x01\x12 \n" +
+	"\tis_active\x18\x06 \x01(\bH\x03R\bisActive\x88\x01\x01\x12\x19\n" +
+	"\btask_ids\x18\a \x03(\tR\ataskIdsB\v\n" +
+	"\t_group_idB\b\n" +
+	"\x06_titleB\f\n" +
+	"\n" +
+	"_course_idB\f\n" +
+	"\n" +
+	"_is_active\"\x99\x02\n" +
 	"\x19UpdateTaskScheduleRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x122\n" +
 	"\x05title\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x05title\x125\n" +
@@ -2728,7 +2755,7 @@ const file_events_v1_event_proto_rawDesc = "" +
 	"\x0fTASK_ASSIGNMENT\x10\x01\x12\x11\n" +
 	"\rTASK_HOMEWORK\x10\x02\x12\r\n" +
 	"\tTASK_QUIZ\x10\x03\x12\x10\n" +
-	"\fTASK_PROJECT\x10\x042\xb4\x0e\n" +
+	"\fTASK_PROJECT\x10\x042\xb0\x0e\n" +
 	"\fEventService\x12A\n" +
 	"\fCreateLesson\x12\x1e.events.v1.CreateLessonRequest\x1a\x11.events.v1.Lesson\x12;\n" +
 	"\tGetLesson\x12\x1b.events.v1.GetLessonRequest\x1a\x11.events.v1.Lesson\x12;\n" +
@@ -2751,8 +2778,8 @@ const file_events_v1_event_proto_rawDesc = "" +
 	"\x12CreateTaskSchedule\x12$.events.v1.CreateTaskScheduleRequest\x1a\x17.events.v1.TaskSchedule\x12M\n" +
 	"\x0fGetTaskSchedule\x12!.events.v1.GetTaskScheduleRequest\x1a\x17.events.v1.TaskSchedule\x12M\n" +
 	"\x11ListTaskSchedules\x12\x1d.events.v1.TaskScheduleFilter\x1a\x17.events.v1.TaskSchedule0\x01\x12S\n" +
-	"\x12UpdateTaskSchedule\x12$.events.v1.UpdateTaskScheduleRequest\x1a\x17.events.v1.TaskSchedule\x12N\n" +
-	"\x12DeleteTaskSchedule\x12 .events.v1.DeleteScheduleRequest\x1a\x16.google.protobuf.Empty\x12[\n" +
+	"\x12UpdateTaskSchedule\x12$.events.v1.UpdateTaskScheduleRequest\x1a\x17.events.v1.TaskSchedule\x12J\n" +
+	"\x12DeleteTaskSchedule\x12\x1c.events.v1.DeleteTaskRequest\x1a\x16.google.protobuf.Empty\x12[\n" +
 	"\x12BatchCreateLessons\x12$.events.v1.BatchCreateLessonsRequest\x1a\x1f.events.v1.BatchLessonsResponse\x12U\n" +
 	"\x10BatchCreateTasks\x12\".events.v1.BatchCreateTasksRequest\x1a\x1d.events.v1.BatchTasksResponse\x12[\n" +
 	"\x12BatchUpdateLessons\x12$.events.v1.BatchUpdateLessonsRequest\x1a\x1f.events.v1.BatchLessonsResponse\x12U\n" +
@@ -2915,7 +2942,7 @@ var file_events_v1_event_proto_depIdxs = []int32{
 	29,  // 99: events.v1.EventService.GetTaskSchedule:input_type -> events.v1.GetTaskScheduleRequest
 	22,  // 100: events.v1.EventService.ListTaskSchedules:input_type -> events.v1.TaskScheduleFilter
 	18,  // 101: events.v1.EventService.UpdateTaskSchedule:input_type -> events.v1.UpdateTaskScheduleRequest
-	30,  // 102: events.v1.EventService.DeleteTaskSchedule:input_type -> events.v1.DeleteScheduleRequest
+	32,  // 102: events.v1.EventService.DeleteTaskSchedule:input_type -> events.v1.DeleteTaskRequest
 	9,   // 103: events.v1.EventService.BatchCreateLessons:input_type -> events.v1.BatchCreateLessonsRequest
 	13,  // 104: events.v1.EventService.BatchCreateTasks:input_type -> events.v1.BatchCreateTasksRequest
 	10,  // 105: events.v1.EventService.BatchUpdateLessons:input_type -> events.v1.BatchUpdateLessonsRequest
@@ -2956,6 +2983,10 @@ func file_events_v1_event_proto_init() {
 	if File_events_v1_event_proto != nil {
 		return
 	}
+	file_events_v1_event_proto_msgTypes[4].OneofWrappers = []any{}
+	file_events_v1_event_proto_msgTypes[8].OneofWrappers = []any{}
+	file_events_v1_event_proto_msgTypes[12].OneofWrappers = []any{}
+	file_events_v1_event_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
