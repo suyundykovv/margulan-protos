@@ -55,7 +55,6 @@ service EventService {
   rpc UpdateTaskSchedule(UpdateTaskScheduleRequest) returns (TaskSchedule);
   rpc DeleteTaskSchedule(DeleteScheduleRequest) returns (google.protobuf.Empty);
   
-  // Батч-операции
   rpc BatchCreateLessons(BatchCreateLessonsRequest) returns (BatchLessonsResponse);
   rpc BatchCreateTasks(BatchCreateTasksRequest) returns (BatchTasksResponse);
   rpc BatchUpdateLessons(BatchUpdateLessonsRequest) returns (BatchLessonsResponse);
@@ -187,7 +186,7 @@ message BatchUpdateTasksRequest {
 message CreateLessonScheduleRequest {
   string group_id = 1;
   string title = 2;
-  google.protobuf.Timestamp valid_from = 3;
+ r valid_from = 3;
   google.protobuf.Timestamp valid_to = 4;
   string course_id = 5;
   bool is_active = 6;
