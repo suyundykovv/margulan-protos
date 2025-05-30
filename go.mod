@@ -1,4 +1,4 @@
-module protos
+module github.com/suyundykovv/margulan-protos
 
 go 1.23.4
 
